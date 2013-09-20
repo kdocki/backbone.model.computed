@@ -4,7 +4,7 @@
  * I like computed properties in EmberJS so I made this Backbone.Model override
  * so that I can easily do them now. Basically 
  */
-// (function() {
+(function() {
 
     /**
      * [toCamelCase description]
@@ -233,4 +233,4 @@
 
     })(Backbone.Model);
 
-// })()
+})()
