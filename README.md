@@ -4,7 +4,10 @@ Wait, I mean... look further. Don't stop looking at this page. Ah, I'm terrible 
 
 If you've used [EmberJS](http://emberjs.com/guides/object-model/computed-properties/), rails, laravel, or many other frameworks then you've probably messed with computed properties. Or maybe you call them dynamic attributes or something else. 
 
-I wanted to be able to do these in my Backbone models so I created this class so that I can do computed properties,
+#### To get started just load [src/backbone.model.computed.js](https://raw.github.com/kdocki/backbone.model.computed/master/src/backbone.model.computed.js) into your page.
+
+But maybe you want to know what this thing does? So basically, I wanted to be able to do this,
+
 
 ```js
 
@@ -19,7 +22,7 @@ I wanted to be able to do these in my Backbone models so I created this class so
   var foo = new FooModel({ first_name: 'Bob', last_name: 'Marley' });
   
   foo.get('full_name'); // Bob Marley
-
+  foo.toJSON();         // { first_name: 'Bob', last_name: 'Marley', full_name: 'Bob Marley' }
 ```
 
 Let's not stop there. You can also set the `full_name` property,
