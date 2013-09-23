@@ -143,6 +143,11 @@
     }
 
     /**
+     * Store the original get function so I can use it later
+     */
+     var origGet = Backbone.Model.prototype.get;
+
+    /**
      * [backboneGet description]
      */
     function backboneGet(attr)
@@ -153,8 +158,13 @@
             return getter.call(this);
         }
 
-        return Backbone.Model.prototype.get.call(this, attr);
+        return origGet.call(this, attr);
     }
+
+    /**
+     * Store the original set function so I can use it later
+     */
+     var origSet = Backbone.Model.prototype.set;
 
     /**
      * [backboneSet description]
@@ -167,15 +177,20 @@
             return setter.call(this, value);
         }
 
-        return Backbone.Model.prototype.set.apply(this, [attr, value]);
+        return origSet.apply(this, [attr, value]);
     }
+
+    /**
+     * Store the original toJSON function so I can use it later
+     */
+    var origToJSON = Backbone.Model.prototype.toJSON
 
     /**
      * [backboneToJSON description]
      */
     function backboneToJSON(options)
     {
-        var data = Backbone.Model.prototype.toJSON.call(this, options);
+        var data = origToJSON.call(this, options);
         var properties = getComputedProperites(this);
 
         for (var index in properties)
@@ -213,10 +228,6 @@
             Model.apply(this, arguments);
      
             setupEvents(this);
-
-            this.get = backboneGet;
-            this.set = backboneSet;
-            this.toJSON = backboneToJSON
         };
 
         _.extend(Backbone.Model, Model);
@@ -232,5 +243,10 @@
         return Backbone.Model;
 
     })(Backbone.Model);
+
+
+    Backbone.Model.prototype.toJSON = backboneToJSON;
+    Backbone.Model.prototype.set = backboneSet;
+    Backbone.Model.prototype.get = backboneGet;
 
 })()
